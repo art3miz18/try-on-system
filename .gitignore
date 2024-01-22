@@ -1,0 +1,11 @@
+.DS_Store
+
+.venv/
+__pycache__/
+data/
+junk/
+project_documents/
+data.gz
+pretrained_models/
+
+

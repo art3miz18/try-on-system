@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&family=Rubik+Burned&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: #dbbdbd;
+  /* font-family: 'Inconsolata', monospace; */
+  font-family: 'Rubik Burned', system-ui;
+}
+
+#result {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  grid-gap: 20px;
+}
+
+#result > div {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: .5rem;
+}
+
+#result > div > h4 {
+  margin: 5px 0 7px 0;
+  font-family: 'Rubik Burned', system-ui;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  font-family: inherit;
+}
+
+h1 {
+  margin: 2rem;
+}
+
+form {
+  margin: 0 2rem;
+}
+
