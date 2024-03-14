@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 import os
-import datetime
 from collections import namedtuple
 
 from .gmm import GMM
@@ -27,17 +26,15 @@ def save_img(arr, path, grayscale=False) -> None:
     im.save(path)
 
 
-def make_inference(cloth_name, img_name, use_cuda=False, result_dir="junk") -> dict[str]:
+def make_inference(cloth_name, img_name, use_cuda=False) -> dict[str]:
     model_opts = get_model_opt(use_cuda=use_cuda)
 
-    now = datetime.datetime.now()
     output_path = "result"
-
-    # os.makedirs(output_path, exist_ok=True)
+    os.makedirs(output_path, exist_ok=True)
 
     path_dict: dict[str] = {
         "cloth_img": os.path.join("data", "cloth", cloth_name),
-        "target_img": os.path.join("data", "image", img_name),
+        "person_img": os.path.join("data", "image", img_name),
         "parse_img": os.path.join("data", "image-parse", img_name.replace(".jpg", ".png")),
         "head_img": os.path.join(output_path, "head.jpg"),
         "shape_img": os.path.join(output_path, "shape.jpg"),
@@ -113,4 +110,3 @@ def make_inference(cloth_name, img_name, use_cuda=False, result_dir="junk") -> d
     save_img( ( p_tryon.squeeze(0).detach().cpu().permute(1, 2, 0) * 0.5 ) + 0.5, path_dict["tryon_img"] )
 
     return path_dict
-
