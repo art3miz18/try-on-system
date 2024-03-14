@@ -10,12 +10,6 @@ export default function Navbar() {
                 <li style={Item}>
                     <NavLink to="/model">Model</NavLink>
                 </li>
-                <li style={Item}>
-                    <NavLink to="/model-evaluation">Evaluation</NavLink>
-                </li>
-                <li style={Item}>
-                    <NavLink to="/history">History</NavLink>
-                </li>
             </ul>
         </nav>
     );
@@ -25,6 +19,8 @@ const NavbarStyle = {
     width: "100vw",
     display: "flex",
     justifyContent: "center",
+    backgroundColor: "#eee",
+    padding: "1.5rem",
 }
 
 const ListStyle = {
