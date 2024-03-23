@@ -5,3 +5,5 @@ It is built to give user the experience of cloth **virtual try-on**.
 
 *This is a project built as part of college curriculum at seventh semester of Bachelors in [CSIT](https://edusanjal.com/course/bsc-computer-science-and-information-technology-bsc-csit-tribhuvan-university/)*.
 
+
+![WebApp ScreenShot](./SS.png)

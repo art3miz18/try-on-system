@@ -77,7 +77,7 @@ def get_cloths():
         cloth_dict =  [ {
             "id": cloth.removesuffix("_1.jpg"),
             "title": cloth,
-            "url": f"data/{os.path.join("data", "cloth", cloth)}",
+            "url": f"data/data/cloth/{cloth}",
         } for cloth in file.read().splitlines() ]
 
     return {
@@ -93,7 +93,7 @@ def get_images():
         img_dict =  [ {
             "id": img.removesuffix("_0.jpg"),
             "title": img,
-            "url": f"data/{os.path.join("data", "image", img)}",
+            "url": f"data/data/image/{img}",
         } for img in file.read().splitlines() ]
 
     return {
