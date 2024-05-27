@@ -9,6 +9,7 @@ export default function ImageGallery({ url, setFileName }) {
         try {
             const response = await fetch(url);
             const data = await response.json();
+            // console.log("res", data);
             setImages(prevImages => [...prevImages, ...data.files]);
         } catch (error) {
             console.error('Error fetching images:', error);

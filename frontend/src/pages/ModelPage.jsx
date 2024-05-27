@@ -48,7 +48,7 @@ export default function ModelPage() {
 
     const displayResult = () => {
         return Object.entries(result).map(([key, value]) => {
-            console.log(value);
+            // console.log(value);
             return (
                 <div key={key}>
                     <h4 style={ResultTitleStyle}>{key}</h4>
@@ -80,7 +80,7 @@ export default function ModelPage() {
                     setParentImage={setImage}
                     onSubmit={generateImages}
                 />
-                <div key={reloadKey} style={ResultContainerStyle}>
+                <div key={reloadKey} style={ResultContainerStyle} >
                     {displayResult()}
                 </div>
             </main>

@@ -21,7 +21,7 @@ class CPDataset(data.Dataset):
         self.fine_height    = 256
         self.fine_width     = 192
         self.radius         = 5
-        self.data_path      = "data"
+        self.data_path      = "Dataset"
         self.grid_path      = osp.join("viton", "grid.png")
 
         self.transformRGB = transforms.Compose([
@@ -30,7 +30,7 @@ class CPDataset(data.Dataset):
                 (0.5, 0.5, 0.5),
                 (0.5, 0.5, 0.5)
             )
-        ])
+        ])  
         self.transformL = transforms.Compose([
             transforms.ToTensor(),
             transforms.Normalize(

@@ -29,13 +29,13 @@ def save_img(arr, path, grayscale=False) -> None:
 def make_inference(cloth_name, img_name, use_cuda=False) -> dict[str]:
     model_opts = get_model_opt(use_cuda=use_cuda)
 
-    output_path = "result"
+    output_path = "data/result"
     os.makedirs(output_path, exist_ok=True)
 
     path_dict: dict[str] = {
-        "cloth_img": os.path.join("data", "cloth", cloth_name),
-        "person_img": os.path.join("data", "image", img_name),
-        "parse_img": os.path.join("data", "image-parse", img_name.replace(".jpg", ".png")),
+        "cloth_img": os.path.join("Dataset", "cloth", cloth_name),
+        "person_img": os.path.join("Dataset", "image", img_name),
+        "parse_img": os.path.join("Dataset", "image-parse", img_name.replace(".jpg", ".png")),
         "head_img": os.path.join(output_path, "head.jpg"),
         "shape_img": os.path.join(output_path, "shape.jpg"),
         "pose_keypoints_img": os.path.join(output_path, "pose_keypoints.jpg"),
@@ -47,8 +47,8 @@ def make_inference(cloth_name, img_name, use_cuda=False) -> dict[str]:
         "tryon_img": os.path.join(output_path, "tryon.jpg"),
     }
 
-    pretrained_gmm_path = os.path.join("pretrained_models", "gmm_final.pth")
-    pretrained_tom_path = os.path.join("pretrained_models", "tom_final.pth")
+    pretrained_gmm_path = os.path.join("./pretrained_models", "gmm_final.pth")
+    pretrained_tom_path = os.path.join("./pretrained_models", "tom_final.pth")
 
     data_loader = CPDataset()
 
