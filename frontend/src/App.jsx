@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import ModelPage from "./pages/ModelPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Navbar from "./components/Navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
     return (
