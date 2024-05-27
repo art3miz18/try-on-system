@@ -1,0 +1,23 @@
+.custom-carousel .carousel-inner {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.custom-carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.carousel-image {
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.custom-carousel .carousel-item.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

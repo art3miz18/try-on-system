@@ -48,9 +48,7 @@ export default function ModelPage() {
         }
     };
 
-
-    
-
+   
     const displayResult = () => {
         return Object.entries(result).map(([key, value]) => {
             return (

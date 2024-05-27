@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
+import '../styles/ImageGallery.css';
 
 export default function ImageGallery({ url, setFileName, selectedFile, isCarousel }) {
     const [images, setImages] = useState([]);
@@ -22,20 +23,28 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
         loadImages();
     }, [url]);
 
+    const handleSelect = (selectedIndex) => {
+        setIndex(selectedIndex);
+        setFileName(images[selectedIndex].url);
+    };
     const handleClick = (event) => {
         setFileName(event.target.alt);
     }
 
     if (isCarousel) {
         return (
-            <Carousel interval={null} onSelect={(selectedIndex, e) => setFileName(images[selectedIndex].title)}>
+            <Carousel 
+                
+                interval={null}
+                className="custom-carousel" 
+                onSelect={(selectedIndex, e) => setFileName(images[selectedIndex].url)}>
                 {images.map((image, id) => (
-                    <Carousel.Item key={id}>
+                    <Carousel.Item key={id} className="custom-carousel-item">
                         <img
                             src={`http://localhost:8000/${image.url}`}
                             alt={image.title}
                             className="d-block w-100 carousel-image"
-                            onClick={handleClick}
+                            onClick={handleClick}                            
                         />
                     </Carousel.Item>
                 ))}
@@ -75,6 +84,7 @@ const GalleryStyle = {
 };
 
 const ImageCardStyle = {
-    boxShadow: "3px 5px 1px brown",
+    boxShadow: "3px 5px 1px gray",
+    height: "215px",
     margin: "5px",
 };
