@@ -3,7 +3,6 @@ from fastapi import FastAPI, Body
 from pydantic import BaseModel
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 from typing import Annotated
 from viton import infer
 

@@ -9,4 +9,7 @@ data.gz
 pretrained_models/
 result/
 Dataset
+
 api/venv
+api/newViton
+api/test

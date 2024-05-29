@@ -113,7 +113,7 @@ export default function ModelPage() {
                 <ImageGallery 
                     url={"http://localhost:8000/images"} 
                     setFileName={setImage} 
-                    selectedFile={selectedModelImage} 
+                    selectedFile={image} 
                     isCarousel={true} 
                 />
                 <Form

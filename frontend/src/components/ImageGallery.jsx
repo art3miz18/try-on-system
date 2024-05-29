@@ -2,6 +2,15 @@ import { useState, useEffect } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import '../styles/ImageGallery.css';
 
+/**
+ * Renders an image gallery component that fetches images from the given URL and displays them in a carousel or grid format.
+ *
+ * @param {string} url - The URL from which to fetch the images.
+ * @param {function} setFileName - A function to set the selected image file name.
+ * @param {string} selectedFile - The currently selected image file name.
+ * @param {boolean} isCarousel - A flag indicating whether to display the images in a carousel format.
+ * @return {JSX.Element} The rendered image gallery component.
+ */
 export default function ImageGallery({ url, setFileName, selectedFile, isCarousel }) {
     const [images, setImages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -12,6 +21,7 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
             const response = await fetch(url);
             const data = await response.json();
             setImages(data.files);
+            setFileName(data.files[0].title);
         } catch (error) {
             console.error('Error fetching images:', error);
         } finally {
@@ -23,10 +33,7 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
         loadImages();
     }, [url]);
 
-    const handleSelect = (selectedIndex) => {
-        setIndex(selectedIndex);
-        setFileName(images[selectedIndex].url);
-    };
+    
     const handleClick = (event) => {
         setFileName(event.target.alt);
     }
@@ -37,7 +44,7 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
                 
                 interval={null}
                 className="custom-carousel" 
-                onSelect={(selectedIndex, e) => setFileName(images[selectedIndex].url)}>
+                onSelect={(selectedIndex, e) => setFileName(images[selectedIndex].title)} fade data-bs-theme="dark">
                 {images.map((image, id) => (
                     <Carousel.Item key={id} className="custom-carousel-item">
                         <img
@@ -46,6 +53,10 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
                             className="d-block w-100 carousel-image"
                             onClick={handleClick}                            
                         />
+                        {/* <carousel-indicators>                            
+                            <img src={`http://localhost:8000/${image.url}`}/>
+                        </carousel-indicators>  */}
+                        
                     </Carousel.Item>
                 ))}
                 {isLoading && <div>Loading more images...</div>}
