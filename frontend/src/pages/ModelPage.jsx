@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ImageGallery from "../components/ImageGallery";
 import Form from "../components/Form";
+import CustomCarousel from "../components/CustomCarousel";
 
 
 const server_base_url = "http://localhost:8000";
@@ -50,14 +51,23 @@ export default function ModelPage() {
 
    
     const displayResult = () => {
-        return Object.entries(result).map(([key, value]) => {
-            return (
-                <div key={key} style={ResultGridItemStyle}>
-                    <p style={ResultTitleStyle}>{key}</p>
-                    <img style={ImageCardStyle} src={`${server_base_url}/${value}`} alt={key} />
+        if(!Object.entries(result).length){
+            return null;
+        }
+        console.log(Object.entries(result));
+
+        const formattedResult = Object.entries(result).map(([key, value]) => ({
+            title: key,  // Assign a generic title or modify as per your data structure
+            url: value
+        }));
+        console.log('formattedResult: ', formattedResult);
+            return(
+                <div>                    
+                    <h2 style={TitleStyle}>Results</h2>
+                    <CustomCarousel images={formattedResult} server_base_url={server_base_url} />            
                 </div>
             );
-        });
+        
     };
 
     useEffect(() => {
@@ -123,7 +133,8 @@ export default function ModelPage() {
                     setParentImage={setImage}
                     onSubmit={generateImages}
                 />
-                <div style={ResultGridStyle}>
+                {/* style={ResultGridStyle} */}
+                <div>
                     {displayResult()}
                 </div>
             </div>
@@ -191,8 +202,4 @@ const ResultTitleStyle = {
     textTransform: "uppercase",
 };
 
-const SelectedImageStyle = {
-    width: "100%",
-    height: "auto",
-    marginBottom: "1rem",
-};
+

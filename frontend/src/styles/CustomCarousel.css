@@ -1,0 +1,41 @@
+.custom-carousel-indicators {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.indicator-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.indicator-thumbnail.active {
+    border: 2px solid blue;
+}
+
+.indicator-wrapper {
+    position: relative;
+}
+
+.indicator-wrapper.active{
+    border: 2px solid blue;
+}
+
+.indicator-title {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background-color: #000;
+    color: #fff;
+    padding: 5px;
+    display: none;
+    z-index: 4;
+}
+.indicator-wrapper:hover .indicator-title {
+    display: block;
+}

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import Carousel from "react-bootstrap/Carousel";
-import '../styles/ImageGallery.css';
+import CustomCarousel from "./CustomCarousel";
 
 /**
  * Renders an image gallery component that fetches images from the given URL and displays them in a carousel or grid format.
@@ -14,7 +13,7 @@ import '../styles/ImageGallery.css';
 export default function ImageGallery({ url, setFileName, selectedFile, isCarousel }) {
     const [images, setImages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
+    const server_base_url = "http://localhost:8000"
     const loadImages = async () => {
         setIsLoading(true);
         try {
@@ -40,27 +39,8 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
 
     if (isCarousel) {
         return (
-            <Carousel 
-                
-                interval={null}
-                className="custom-carousel" 
-                onSelect={(selectedIndex, e) => setFileName(images[selectedIndex].title)} fade data-bs-theme="dark">
-                {images.map((image, id) => (
-                    <Carousel.Item key={id} className="custom-carousel-item">
-                        <img
-                            src={`http://localhost:8000/${image.url}`}
-                            alt={image.title}
-                            className="d-block w-100 carousel-image"
-                            onClick={handleClick}                            
-                        />
-                        {/* <carousel-indicators>                            
-                            <img src={`http://localhost:8000/${image.url}`}/>
-                        </carousel-indicators>  */}
-                        
-                    </Carousel.Item>
-                ))}
-                {isLoading && <div>Loading more images...</div>}
-            </Carousel>
+            
+            <CustomCarousel images={images} server_base_url={server_base_url} setFileName={(setFileName)}/>
         );
     }
 
