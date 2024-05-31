@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import CustomCarousel from "./CustomCarousel";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 /**
  * Renders an image gallery component that fetches images from the given URL and displays them in a carousel or grid format.
@@ -10,7 +12,7 @@ import CustomCarousel from "./CustomCarousel";
  * @param {boolean} isCarousel - A flag indicating whether to display the images in a carousel format.
  * @return {JSX.Element} The rendered image gallery component.
  */
-export default function ImageGallery({ url, setFileName, selectedFile, isCarousel }) {
+export default function ImageGallery({ url, setFileName, selectedFile, isCarousel,style }) {
     const [images, setImages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const server_base_url = "http://localhost:8000"
@@ -40,23 +42,46 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
     if (isCarousel) {
         return (
             
-            <CustomCarousel images={images} server_base_url={server_base_url} setFileName={(setFileName)}/>
+            <CustomCarousel images={images} server_base_url={server_base_url} setFileName={(setFileName)} style={style} />
         );
     }
 
     return (
-        <div className="gallery" style={GalleryStyle}>
+        <div  style={GalleryStyle}>
             {images.map((image, id) => (
-                <img
-                    key={id}
-                    src={`http://localhost:8000/${image.url}`}
-                    alt={image.title}
-                    style={{
-                        ...ImageCardStyle,
-                        border: image.title === selectedFile ? "2px solid blue" : "1px solid gray",
-                    }}
-                    onClick={handleClick}
-                />
+                // <>                      
+                //     <Row>
+                //         <img
+                //             key={id}
+                //             src={`http://localhost:8000/${image.url}`}
+                //             alt={image.title}
+                //             style={{
+                //                 ...ImageCardStyle,
+                //                 border: image.title === selectedFile ? "2px solid blue" : "1px solid gray",
+                //             }}
+                //             onClick={handleClick}
+                //         />
+                //     </Row>   
+                //     <Row>
+                //         <span style={{ textAlign: "center"}}>{image.title}</span>
+                //     </Row>           
+                // </>
+                <div key={id} style={{ textAlign: "left", padding: "5px" }}>                     
+                    <img
+                        src={`${server_base_url}/${image.url}`}
+                        alt={image.title}
+                        style={{
+                            ...ImageCardStyle,
+                            border: image.title === selectedFile ? "2px solid blue" : "1px solid gray",
+                            // width: "100%",  // Ensure image fills the container
+                            height: "auto"
+                        }}
+                        onClick={handleClick}
+                    />
+                    <div>
+                        <span style={{fontWeight: "bold"}}>{image.title}</span>
+                    </div>            
+                </div>
             ))}
             {isLoading && <div>Loading more images...</div>}
         </div>
@@ -64,14 +89,13 @@ export default function ImageGallery({ url, setFileName, selectedFile, isCarouse
 }
 
 const GalleryStyle = {
-    padding: "5px 8px",
-    width: "100%",
+    
+   
     height: "auto",
     display: "flex",
     flexWrap: "wrap",
     overflowY: "auto",
-    backgroundColor: "#eee",
-    justifyContent: "space-around",
+    
 };
 
 const ImageCardStyle = {

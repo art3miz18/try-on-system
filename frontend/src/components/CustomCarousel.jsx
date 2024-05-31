@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Carousel } from "react-bootstrap";
 import '../styles/CustomCarousel.css';
 
-const CustomCarousel = ({ images, server_base_url, setFileName }) => {
+const CustomCarousel = ({ images, server_base_url, setFileName, style }) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const handleSelect = (selectedIndex) => {
         setActiveIndex(selectedIndex);
-        setFileName(images[selectedIndex].title);
+        setFileName?.(images[selectedIndex].title);
     };
 
     const handleThumbnailClick = (index) => {
@@ -15,25 +15,21 @@ const CustomCarousel = ({ images, server_base_url, setFileName }) => {
     };
 
     return (
-        <div>
+        <div style={style}>
             <Carousel 
                     activeIndex={activeIndex}
                     onSelect={handleSelect}
                     indicators = {false} 
+                    interval={null}
                     fade
                     data-bs-theme="dark">
-
                 {images.map((image, id) => (
                     <Carousel.Item key={id} className="custom-carousel-item">
                         <img
                             src={`${server_base_url}/${image.url}`}
                             alt={image.title}
-                            className="d-block w-100 carousel-image"
-                        />
-                        {/* <Carousel.Caption>
-                            <h3>{image.title}</h3>
-                            <p>{image.description}</p>
-                        </Carousel.Caption> */}
+                            className="d-block w-100 carousel-image"                            
+                        />                        
                     </Carousel.Item>
                 ))}
             </Carousel>

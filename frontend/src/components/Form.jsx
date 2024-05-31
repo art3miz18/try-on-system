@@ -1,50 +1,41 @@
-export default function Form({ cloth, setCloth, image, setImage, onSubmit }) {
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+export default function FormElem({ cloth, setCloth, image, setImage, onSubmit }) {
     return (
-        <form style={FormStyle}>
-            <label style={ItemStyle}>
-                <span>Cloth: </span>
-                <input value={cloth} onChange={e => setCloth(e.target.value)} type="text" pattern="\d{6}_1.jpg" required style={InputStyle} />
-            </label>
+        <Form style={FormStyle}>
+            <Form.Group className="mb-3" controlId="formBasicEmail">    
+                <Form.Label >
+                    Cloth:
+                </Form.Label>
+                    <Form.Control value={cloth} onChange={e => setCloth(e.target.value)} type="text" pattern="\d{6}_1.jpg" required  />
+            </Form.Group>
 
-            <label style={ItemStyle}>
-                <span>Image: </span>
-                <input value={image} onChange={e => setImage(e.target.value)} type="text" pattern="\d{6}_0.jpg" required style={InputStyle} />
-            </label>
+            <Form.Group className="mb-3" controlId="formBasicEmail">    
+                <Form.Label>
+                    Image:
+                </Form.Label>
+                <Form.Control value={image} onChange={e => setImage(e.target.value)} type="text" pattern="\d{6}_0.jpg" required  />
+            </Form.Group>
 
-            <button onClick={onSubmit} style={ButtonStyle}>
+            <Button onClick={onSubmit} style={ButtonStyle}>
                 Infer
-            </button>
-        </form>
+            </Button>
+        </Form>
     );
 }
 
 const FormStyle = {
     padding: "10px",
-    backgroundColoe: "#eee",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "space-around",
+    backgroundColor: "#cecece",    
     boxShadow: "10px 10px 10px black",
-    marginBottom: "2.5rem",
 };
 
-const ItemStyle = {
-    display: "block",
-    marginBottom: "12px",
-    marginLeft: "3rem",
-};
+
 
 const ButtonStyle = {
-    padding: "6px 15px",
     textTransform: "uppercase",
-    marginLeft: "3rem",
-    backgroundColor: "#1ec927",
     color: "white",
-    width: "30%",
+    width: "75%",
     borderRadius: "12px",
 };
 
-const InputStyle = {
-    padding: "6px",
-}

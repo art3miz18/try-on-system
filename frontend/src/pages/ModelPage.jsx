@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import ImageGallery from "../components/ImageGallery";
-import Form from "../components/Form";
+import FormElem from "../components/Form";
 import CustomCarousel from "../components/CustomCarousel";
-
+// Bootstrap components
+import Container from 'react-bootstrap/Container';
+// import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Row } from "react-bootstrap";
 
 const server_base_url = "http://localhost:8000";
 
@@ -54,6 +58,7 @@ export default function ModelPage() {
         if(!Object.entries(result).length){
             return null;
         }
+
         console.log(Object.entries(result));
 
         const formattedResult = Object.entries(result).map(([key, value]) => ({
@@ -62,9 +67,9 @@ export default function ModelPage() {
         }));
         console.log('formattedResult: ', formattedResult);
             return(
-                <div>                    
+                <div style={{marginTop: "20px"}}>                    
                     <h2 style={TitleStyle}>Results</h2>
-                    <CustomCarousel images={formattedResult} server_base_url={server_base_url} />            
+                    <CustomCarousel images={formattedResult} server_base_url={server_base_url} style={CarouselStyle} />            
                 </div>
             );
         
@@ -79,91 +84,79 @@ export default function ModelPage() {
     }, [result]);
 
     return (
-        <div style={ContainerStyle}>
-            <aside style={SidebarStyle}>
-                <section style={SectionStyle}>
-                    <h2 style={TitleStyle}>Categories</h2>
-                    <ul style={ListStyle}>
-                        <li>All categories</li>
-                        <li>Dresses</li>
-                        <li>Jumpsuits</li>
-                        <li>Blouses</li>
-                        <li>Shirts</li>
-                        <li>T-Shirts</li>
-                        <li>Tank tops</li>
-                        <li>Tops</li>
-                        <li>Sweaters</li>
-                        <li>Sweatshirts</li>
-                        <li>Cardigans</li>
-                        <li>Blazers</li>
-                        <li>Jackets</li>
-                        <li>Coats</li>
-                        <li>Pants</li>
-                        <li>Jeans</li>
-                        <li>Tights</li>
-                        <li>Bodys</li>
-                        <li>Shorts</li>
-                        <li>Skirts</li>
-                    </ul>
-                </section>
-            </aside>
-            <main style={MainContentStyle}>
-                <section style={SectionStyle}>
-                    <h2 style={TitleStyle}>cloths</h2>
+        <Container fluid >
+            <Row >
+                {/* <Col lg="2" md="2">                    
+                        <h2 style={TitleStyle}>Categories</h2>
+                        <ul style={ListStyle}>
+                            <li>All categories</li>
+                            <li>Dresses</li>
+                            <li>Jumpsuits</li>
+                            <li>Blouses</li>
+                            <li>Shirts</li>
+                            <li>T-Shirts</li>
+                            <li>Tank tops</li>
+                            <li>Tops</li>
+                            <li>Sweaters</li>
+                            <li>Sweatshirts</li>
+                            <li>Cardigans</li>
+                            <li>Blazers</li>
+                            <li>Jackets</li>
+                            <li>Coats</li>
+                            <li>Pants</li>
+                            <li>Jeans</li>
+                            <li>Tights</li>
+                            <li>Bodys</li>
+                            <li>Shorts</li>
+                            <li>Skirts</li>
+                        </ul>                    
+                </Col> */}
+                <Col lg="6" md="6" sm="8">
+                    
+                        <h2 style={TitleStyle}>cloths</h2>
+                        <ImageGallery 
+                            url={"http://localhost:8000/cloths"} 
+                            setFileName={setCloth} 
+                            selectedFile={image} 
+                            isCarousel={false}
+                        />
+                    
+                </Col>
+                <Col lg="4" md="3" style={RightSectionStyle}>
+                    <h2 style={TitleStyle}>Selected Model</h2>
                     <ImageGallery 
-                        url={"http://localhost:8000/cloths"} 
-                        setFileName={setCloth} 
+                        url={"http://localhost:8000/images"} 
+                        setFileName={setImage} 
                         selectedFile={image} 
-                        isCarousel={false}
+                        isCarousel={true} 
+                        style={CarouselStyle}
                     />
-                </section>
-            </main>
-            <div style={RightSectionStyle}>
-                <h2 style={TitleStyle}>Selected Model</h2>
-                <ImageGallery 
-                    url={"http://localhost:8000/images"} 
-                    setFileName={setImage} 
-                    selectedFile={image} 
-                    isCarousel={true} 
-                />
-                <Form
-                    cloth={cloth}
-                    setParentCloth={setCloth}
-                    image={image}
-                    setParentImage={setImage}
-                    onSubmit={generateImages}
-                />
-                {/* style={ResultGridStyle} */}
-                <div>
-                    {displayResult()}
-                </div>
-            </div>
-        </div>
+                    <FormElem
+                        cloth={cloth}
+                        setParentCloth={setCloth}
+                        image={image}
+                        setParentImage={setImage}
+                        onSubmit={generateImages}
+                    />
+                    
+                </Col>
+                <Col lg="4" md="3" style={RightSectionStyle}>
+                    <div>
+                        {displayResult()}
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
-const ContainerStyle = {
-    display: "grid",
-    gridTemplateColumns: "1fr 2fr 1fr",
-    gap: "1rem",
-    height: "100vh",
-};
-
-const SidebarStyle = {
-    padding: "1rem",
-    backgroundColor: "#f8f8f8",
-    overflowY: "auto",
-};
-
-const MainContentStyle = {
-    padding: "1rem",
-    overflowY: "auto",
-    gridColumn: "2 / 3",
-};
 
 const RightSectionStyle = {
+    alignContent: "right",
+    
     padding: "1rem",
     overflowY: "auto",
+    maxWidth:"max-content"
 };
 
 const SectionStyle = {
@@ -180,26 +173,12 @@ const ListStyle = {
     padding: "0",
 };
 
-const ResultGridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-    gap: "1rem",
-    marginTop: "2rem",
+
+const CarouselStyle = {
+    maxWidth: "400px",  
+    height: "auto",
+    overflow: "hidden"
 };
 
-const ResultGridItemStyle = {
-    border: "1px solid black",
-    boxShadow: "3px 5px 1px brown",
-    padding: "1rem",
-};
-
-const ImageCardStyle = {
-    height: "215px",
-    width: "100%",
-};
-
-const ResultTitleStyle = {
-    textTransform: "uppercase",
-};
 
 
